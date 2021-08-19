@@ -2,6 +2,7 @@
 this script run a command if its failed in first time, multiple times in an interval.
 
 Usage: try [options] COMMAND
+
 execute a command repeatedly
 
 Options:
