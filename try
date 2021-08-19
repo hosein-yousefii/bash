@@ -1,0 +1,193 @@
+#!/bin/bash
+
+### take inputs inorder to use them in the future
+### note: when we use case *)
+### our inputs would be clear, so we need to store them before.
+
+_1=$1
+_2=$2
+_3=$3
+_4=$4
+_5=$5
+_6=$6
+_7=$7
+_8=$8
+
+
+### thi section describe how a command execute for many times with specified interval.
+
+execute() {
+	
+        $command 
+        status=$?
+        echo
+
+        while [[ $status != 0 ]]
+        do
+        	for i in `seq 1 $retry`
+                do
+                	sleep $interval
+
+                        $command 
+                        status=$?
+                        echo
+
+                        if [[ $status -eq 0 ]]
+                        then
+                        	break
+                        fi
+                done
+
+                if [[ $status -ne 0 ]]
+                then
+
+                	echo $status
+                        exit 1
+                fi
+
+        done
+}
+
+
+### we found if there's a command or not, when we use "-i" and "-n".
+
+with_param() {
+
+	if [[ ! -z $_5 ]]
+	then
+		command="$_5 $_6 $_7 $_8"
+	elif [[ ! -z $TRY_COMMAND ]]
+	then
+		command=$TRY_COMMAND
+	else
+		echo
+		echo "please put your commands in TRY_COMMAND or as an inputi, like: try ls"
+		echo
+		exit 2
+	fi
+}
+
+
+### we found if there's a command or not, when we use "-i" or "-n".
+
+without_param() {
+
+	if [[ ! -z $_3 ]]
+        then
+		command="$_3 $_4 $_5 $_6"
+        elif [[ ! -z $TRY_COMMAND ]]
+        then
+                command=$TRY_COMMAND
+        else
+		echo
+                echo "please put your commands in TRY_COMMAND or as an inputi, like: try ls"
+		echo
+                exit 2
+        fi
+}
+
+
+### we found if there's a command or not, when we don't use neither "-i" nor "-n".
+
+with_nothing() {
+
+	if [[ ! -z $_1 ]]
+        then
+                command="$_1 $_2 $_3 $_4"
+	elif [[ ! -z $TRY_COMMAND ]]
+        then
+                command=$TRY_COMMAND
+	else
+		echo
+        	echo "please put your commands in TRY_COMMAND or as an inputi, like: try ls"
+		echo
+                exit 2
+        fi
+}
+
+
+### we found which options is used first and what should be expected.
+
+case $_1 in
+
+        -i)
+                interval=$_2
+
+                case $_3 in
+
+                        -n)
+                                retry=$_4
+				with_param
+                        ;;
+
+                        *)
+                                retry=${TRY_NUMBER:-12}
+				without_param
+                        ;;
+
+                esac
+
+		execute                
+	;;
+        
+        -n)
+                retry=$_2
+
+		case $_3 in
+
+                        -i)
+                                interval=$_4
+                                with_param
+                        ;;
+
+                        *)
+				interval=${TRY_INTERVAL:-5}
+                                without_param
+                        ;;
+
+                esac
+		
+		execute
+   	;;
+
+	-h)
+		echo """
+		Usage: try [options] COMMAND
+		execute a command repeatedly
+
+		Options:
+
+		-i num, 	interval between repetition (Default: 5)
+		-n num,		number of repetition (Default: 12)
+		-h 		help
+
+		Also you're able to set Environment variables instead
+
+		TRY_INTERVAL	interval between repetition (Default: 5)
+		TRY_NUMBER	number of repetition (Default: 12)
+		TRY_COMMAND	the command that you want to execute
+
+		Exit status:
+		0	ok
+		1	unsuccessful
+		2	command is not specified by input or Environment variable.
+
+		Sample:
+		try -i 2 -n 5 ls -l
+
+		try -n 4 ping -c 2 4.2.2.4
+
+		Note:
+		if you're using commands with more than 3 arguments you must use Environment variable.
+
+
+		Written by: hosein yousefi (https://github.com/hosein-yousefii) """
+	;;
+        *)
+                interval=${TRY_INTERVAL:-5}
+                retry=${TRY_NUMBER:-12}
+		with_nothing	
+		execute
+       	;;
+esac
+
