@@ -41,7 +41,6 @@ execute() {
                 if [[ $status -ne 0 ]]
                 then
 
-                	echo $status
                         exit 1
                 fi
 
@@ -61,7 +60,7 @@ with_param() {
 		command=$TRY_COMMAND
 	else
 		echo
-		echo "please put your commands in TRY_COMMAND or as an inputi, like: try ls"
+		echo "please put your commands in TRY_COMMAND or as an inputi, like: try ls" >/proc/self/fd/2
 		echo
 		exit 2
 	fi
@@ -80,7 +79,7 @@ without_param() {
                 command=$TRY_COMMAND
         else
 		echo
-                echo "please put your commands in TRY_COMMAND or as an inputi, like: try ls"
+                echo "please put your commands in TRY_COMMAND or as an inputi, like: try ls" >/proc/self/fd/2
 		echo
                 exit 2
         fi
@@ -99,7 +98,7 @@ with_nothing() {
                 command=$TRY_COMMAND
 	else
 		echo
-        	echo "please put your commands in TRY_COMMAND or as an inputi, like: try ls"
+        	echo "please put your commands in TRY_COMMAND or as an inputi, like: try ls" >/proc/self/fd/2
 		echo
                 exit 2
         fi
