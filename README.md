@@ -12,6 +12,7 @@ Options:
 -n num,		number of repetition (Default: 12)
 
 -h 		help
+_____________________________________________________________________________________________________
 
 Also you're able to set Environment variables instead
 
@@ -20,6 +21,7 @@ TRY_INTERVAL	interval between repetition (Default: 5)
 TRY_NUMBER	number of repetition (Default: 12)
 
 TRY_COMMAND	the command that you want to execute
+____________________________________________________________________________________________________
 
 Exit status:
 
@@ -28,7 +30,7 @@ Exit status:
 1	unsuccessful
 
 2	command is not specified by input or Environment variable.
-
+_____________________________________________________________________________________________________
 Sample:
 
 try -i 2 -n 5 ls -l
@@ -39,6 +41,7 @@ try ls -l
 
 TRY_COMMAND="telnet localhost 25" try
 
+_____________________________________________________________________________________________________
 
 Note:
 
