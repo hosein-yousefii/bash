@@ -1,9 +1,13 @@
+# Introduction
+This script (try) run a command multiple times with an interval if the command fails for the first time.
+Whenever the exit status of the running command return 0, the script doesn't continue any more.
+_____________________________________________________________________________________________________
 
-this script run a command if its failed in first time, multiple times in an interval.
+# How to
 
 Usage: try [options] COMMAND
 
-execute a command repeatedly
+Execute a command repeatedly
 
 Options:
 
@@ -12,15 +16,14 @@ Options:
 -n num,		number of repetition (Default: 12)
 
 -h 		help
-_____________________________________________________________________________________________________
 
-Also you're able to set Environment variables instead
+Also you're able to set Environment variables instead of options.
 
-TRY_INTERVAL	interval between repetition (Default: 5)
+TRY_INTERVAL=	interval between repetition (Default: 5)
 
-TRY_NUMBER	number of repetition (Default: 12)
+TRY_NUMBER=	number of repetition (Default: 12)
 
-TRY_COMMAND	the command that you want to execute
+TRY_COMMAND=	the command that you want to execute
 ____________________________________________________________________________________________________
 
 Exit status:
@@ -43,11 +46,9 @@ TRY_COMMAND="telnet localhost 25" try
 
 _____________________________________________________________________________________________________
 
-Note:
+# contribute
 
-if you're using commands with more than 3 arguments you must use Environment variable.
-
-
+You are able to improve the sccript functionality in different environment.
 
 
 
