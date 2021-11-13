@@ -1,9 +1,13 @@
-# Introduction
+[![GitHub license](https://img.shields.io/github/license/hosein-yousefii/docker-ansible)](https://github.com/hosein-yousefii/docker-ansible/blob/master/LICENSE)
+![LinkedIn](https://shields.io/badge/style-hoseinyousefii-black?logo=linkedin&label=LinkedIn&link=https://www.linkedin.com/in/hoseinyousefi)
+
+
+## Introduction
 This script (try) run a command multiple times with an interval if the command fails for the first time.
 Whenever the exit status of the running command return 0, the script doesn't continue any more.
-_____________________________________________________________________________________________________
 
-# How to
+
+## How to
 
 Usage: try [options] COMMAND
 
@@ -36,17 +40,18 @@ Exit status:
 _____________________________________________________________________________________________________
 Sample:
 
+```bash
 try -i 2 -n 5 ls -l
 
 try -n 4 ping -c 2 4.2.2.4
 
 try ls -l
-
+```
 TRY_COMMAND="telnet localhost 25" try
 
 _____________________________________________________________________________________________________
 
-# contribute
+## contribute
 
 You are able to improve the sccript functionality in different environment.
 
