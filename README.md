@@ -54,4 +54,4 @@ You are able to improve the sccript functionality in different environment.
 
 
 
-[@dwsclass](https://github.com/dwsclass) dws-dev-002-bash
+Copyright 2021 Hosein Yousefi <yousefi.hosein.o@gmail.com>
